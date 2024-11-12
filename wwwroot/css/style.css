@@ -1,6 +1,6 @@
 :root {
   --primary-color: #2196F3;
-  --secondary-color: #333;
+  --secondary-color: #333;//color
   --light-color: #666;
   --bg-color: #fff;
   --border: .1rem solid rgba(0,0,0,.1);
