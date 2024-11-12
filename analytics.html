@@ -1,0 +1,626 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - Backpack to Europe</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <!-- Add this CSS in the style section -->
+    <style>
+        body {
+            background-color: #e0e0e0;
+        }
+
+        /* Analytics Section */
+        .analytics-section {
+            padding: 8rem 7% 2rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+            padding: 0 2rem;
+        }
+
+        .stat-card {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.1);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2196F3;
+            margin: 0.5rem 0;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        /* Charts Grid */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 2rem;
+        }
+
+        .chart-container {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.1);
+            min-height: 400px;
+        }
+
+            .chart-container.full-width {
+                grid-column: 1 / -1;
+                min-height: 350px;
+            }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .chart-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            margin: 0;
+        }
+
+        .filter-select {
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(0,0,0,.1);
+            border-radius: 4px;
+            font-size: 0.9rem;
+            background-color: #fff;
+            cursor: pointer;
+        }
+
+        /* Chart Canvas */
+        .chart-container canvas {
+            width: 100% !important;
+            max-height: 300px !important;
+        }
+
+        .full-width canvas {
+            max-height: 250px !important;
+        }
+
+        /* Heading Style */
+        .heading {
+            text-align: center;
+            font-size: 3rem;
+            color: #333;
+            padding: 1rem;
+            margin: 2rem 0;
+        }
+
+            .heading span {
+                color: #2196F3;
+            }
+
+        /* Footer */
+        .footer {
+            background: #fff;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 4rem;
+            width: 100%;
+        }
+
+        .footer-title {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+            .footer-title span {
+                color: #2196F3;
+            }
+
+        .footer p {
+            color: #666;
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 0 1rem;
+            }
+
+            .chart-container {
+                min-height: 350px;
+            }
+
+            .heading {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-container {
+                padding: 1.5rem;
+            }
+
+            .heading {
+                font-size: 2rem;
+            }
+
+            .stat-value {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <input type="checkbox" name="" id="toggler">
+        <label for="toggler" class="fas fa-bars"></label>
+
+        <a href="index.html" class="logo">
+            Fly<span>Europe</span>
+        </a>
+
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="destinations.html">Destinations</a>
+            <a href="bookings.html">Bookings</a>
+            <a href="analytics.html" class="active">Analytics</a>
+            <a href="contact.html">Contact</a>
+            <a href="reviews.html">Reviews</a>
+        </nav>
+
+        <div class="icons">
+            
+        </div>
+    </header>
+
+    <section class="analytics-section">
+        <h2 class="heading">Travel <span>Analytics</span></h2>
+
+        <!-- Key Statistics -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">15,234</div>
+                <div class="stat-label">Total Bookings</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">€2.1M</div>
+                <div class="stat-label">Revenue</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">4.8</div>
+                <div class="stat-label">Average Rating</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">89%</div>
+                <div class="stat-label">Customer Satisfaction</div>
+            </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="charts-grid">
+            <!-- Popular Destinations -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3 class="chart-title">Popular Destinations</h3>
+                    <div class="chart-filters">
+                        <select class="filter-select" id="popularDestPeriod">
+                            <option value="month">Last Month</option>
+                            <option value="quarter">Last Quarter</option>
+                            <option value="year">Last Year</option>
+                        </select>
+                    </div>
+                </div>
+                <canvas id="popularDestChart"></canvas>
+            </div>
+
+            <!-- Emerging Destinations -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3 class="chart-title">Emerging Destinations</h3>
+                    <div class="chart-filters">
+                        <select class="filter-select" id="emergingDestPeriod">
+                            <option value="month">Last Month</option>
+                            <option value="quarter">Last Quarter</option>
+                        </select>
+                    </div>
+                </div>
+                <canvas id="emergingDestChart"></canvas>
+            </div>
+
+            <!-- Monthly Bookings Trend -->
+            <div class="chart-container full-width">
+                <div class="chart-header">
+                    <h3 class="chart-title">Monthly Booking Trends</h3>
+                    <div class="chart-filters">
+                        <select class="filter-select" id="bookingTrendYear">
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                        </select>
+                    </div>
+                </div>
+                <canvas id="bookingTrendChart"></canvas>
+            </div>
+
+            <!-- Customer Satisfaction -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3 class="chart-title">Satisfaction by Category</h3>
+                </div>
+                <canvas id="satisfactionChart"></canvas>
+            </div>
+
+            <!-- Destination Demographics -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3 class="chart-title">Age Group Distribution</h3>
+                </div>
+                <canvas id="demographicsChart"></canvas>
+            </div>
+
+            <!-- Net Promoter Score -->
+            <div class="chart-container full-width">
+                <div class="chart-header">
+                    <h3 class="chart-title">Net Promoter Score Trend</h3>
+                </div>
+                <canvas id="npsChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h3> Fly<span> Europe</span> </h3>
+            </div>
+            <div class="footer-info">
+                <p>© 2024 FlyEurope. All rights reserved.</p>
+                <p>Contact: info@flyeurope.com | +123-456-7890</p>
+                <p>Address: London, UK - 400104</p>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .footer {
+            background: #f9f9f9;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 4rem;
+            width: 100%;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .footer-logo {
+            margin-bottom: 1rem;
+        }
+
+            .footer-logo h3 {
+                font-size: 2rem;
+                color: #333;
+                margin-bottom: 1rem;
+                text-align: center;
+            }
+
+            .footer-logo span {
+                color: #2196F3;
+            }
+
+        .footer-info {
+            text-align: center;
+        }
+
+            .footer-info p {
+                color: #666;
+                margin: 0.5rem 0;
+                text-align: center;
+            }
+    </style>
+
+    <script>
+        // Common options for all charts
+        const commonOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        boxWidth: 12,
+                        padding: 15,
+                        font: {
+                            size: 11
+                        }
+                    }
+                }
+            }
+        };
+
+        // Options for bar charts
+        const barOptions = {
+            ...commonOptions,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        font: {
+                            size: 11
+                        }
+                    }
+                },
+                x: {
+                    ticks: {
+                        font: {
+                            size: 11
+                        }
+                    }
+                }
+            }
+        };
+
+        // Options for line charts
+        const lineOptions = {
+            ...commonOptions,
+            elements: {
+                line: {
+                    tension: 0.3
+                },
+                point: {
+                    radius: 3
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        font: {
+                            size: 11
+                        }
+                    }
+                },
+                x: {
+                    ticks: {
+                        font: {
+                            size: 11
+                        }
+                    }
+                }
+            }
+        };
+
+        window.onload = function () {
+            // Popular Destinations Pie Chart
+            const popularDestCtx = document.getElementById('popularDestChart').getContext('2d');
+            const popularDestChart = new Chart(popularDestCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Paris', 'Rome', 'Barcelona', 'Amsterdam', 'Prague'],
+                    datasets: [{
+                        data: [30, 25, 20, 15, 10],
+                        backgroundColor: [
+                            'rgba(33, 150, 243, 0.8)',   // Blue
+                            'rgba(76, 175, 80, 0.8)',    // Green
+                            'rgba(255, 193, 7, 0.8)',    // Yellow
+                            'rgba(156, 39, 176, 0.8)',   // Purple
+                            'rgba(244, 67, 54, 0.8)'     // Red
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    ...commonOptions,
+                    plugins: {
+                        legend: {
+                            position: 'right'
+                        }
+                    }
+                }
+            });
+
+            // Emerging Destinations Bar Chart
+            const emergingDestCtx = document.getElementById('emergingDestChart').getContext('2d');
+            const emergingDestChart = new Chart(emergingDestCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Porto', 'Zagreb', 'Krakow', 'Valencia', 'Dubrovnik'],
+                    datasets: [{
+                        label: 'Growth Rate (%)',
+                        data: [45, 35, 30, 28, 25],
+                        backgroundColor: 'rgba(33, 150, 243, 0.8)',
+                        borderColor: 'rgba(33, 150, 243, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: barOptions
+            });
+
+            // Monthly Booking Trends Line Chart
+            const bookingTrendCtx = document.getElementById('bookingTrendChart').getContext('2d');
+            const bookingTrendChart = new Chart(bookingTrendCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'Bookings 2024',
+                        data: [1200, 1350, 1500, 1800, 2100, 2400, 2800, 2600, 2200, 1900, 1600, 1400],
+                        borderColor: 'rgba(33, 150, 243, 1)',
+                        backgroundColor: 'rgba(33, 150, 243, 0.1)',
+                        fill: true
+                    },
+                    {
+                        label: 'Bookings 2023',
+                        data: [1000, 1200, 1300, 1600, 1900, 2200, 2500, 2300, 2000, 1700, 1400, 1200],
+                        borderColor: 'rgba(76, 175, 80, 1)',
+                        backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                        fill: true
+                    }]
+                },
+                options: lineOptions
+            });
+
+            // Satisfaction Radar Chart
+            const satisfactionCtx = document.getElementById('satisfactionChart').getContext('2d');
+            const satisfactionChart = new Chart(satisfactionCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Accommodation', 'Transport', 'Activities', 'Service', 'Value'],
+                    datasets: [{
+                        label: '2024',
+                        data: [4.5, 4.2, 4.8, 4.6, 4.3],
+                        backgroundColor: 'rgba(33, 150, 243, 0.2)',
+                        borderColor: 'rgba(33, 150, 243, 1)',
+                        pointBackgroundColor: 'rgba(33, 150, 243, 1)'
+                    },
+                    {
+                        label: '2023',
+                        data: [4.2, 4.0, 4.5, 4.3, 4.1],
+                        backgroundColor: 'rgba(76, 175, 80, 0.2)',
+                        borderColor: 'rgba(76, 175, 80, 1)',
+                        pointBackgroundColor: 'rgba(76, 175, 80, 1)'
+                    }]
+                },
+                options: {
+                    ...commonOptions,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 5,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Demographics Doughnut Chart
+            const demographicsCtx = document.getElementById('demographicsChart').getContext('2d');
+            const demographicsChart = new Chart(demographicsCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['18-24', '25-34', '35-44', '45-54', '55+'],
+                    datasets: [{
+                        data: [20, 35, 25, 15, 5],
+                        backgroundColor: [
+                            'rgba(33, 150, 243, 0.8)',
+                            'rgba(76, 175, 80, 0.8)',
+                            'rgba(255, 193, 7, 0.8)',
+                            'rgba(156, 39, 176, 0.8)',
+                            'rgba(244, 67, 54, 0.8)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    ...commonOptions,
+                    cutout: '70%'
+                }
+            });
+
+            // NPS Line Chart
+            const npsCtx = document.getElementById('npsChart').getContext('2d');
+            const npsChart = new Chart(npsCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'NPS Score',
+                        data: [65, 68, 72, 75, 78, 82],
+                        borderColor: 'rgba(33, 150, 243, 1)',
+                        backgroundColor: 'rgba(33, 150, 243, 0.1)',
+                        fill: true
+                    }]
+                },
+                options: {
+                    ...lineOptions,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                stepSize: 20
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Event listeners for filter changes
+            document.getElementById('popularDestPeriod').addEventListener('change', function (e) {
+                const period = e.target.value;
+                // Sample data for different periods
+                const periodData = {
+                    'month': [35, 20, 15, 20, 10],
+                    'quarter': [30, 25, 20, 15, 10],
+                    'year': [28, 22, 25, 15, 10]
+                };
+                popularDestChart.data.datasets[0].data = periodData[period];
+                popularDestChart.update();
+            });
+
+            document.getElementById('emergingDestPeriod').addEventListener('change', function (e) {
+                const period = e.target.value;
+                // Sample data for different periods
+                const periodData = {
+                    'month': [48, 38, 32, 30, 28],
+                    'quarter': [45, 35, 30, 28, 25]
+                };
+                emergingDestChart.data.datasets[0].data = periodData[period];
+                emergingDestChart.update();
+            });
+
+            document.getElementById('bookingTrendYear').addEventListener('change', function (e) {
+                const year = e.target.value;
+                // Sample data for different years
+                const yearData = {
+                    '2024': [1200, 1350, 1500, 1800, 2100, 2400, 2800, 2600, 2200, 1900, 1600, 1400],
+                    '2023': [1000, 1200, 1300, 1600, 1900, 2200, 2500, 2300, 2000, 1700, 1400, 1200]
+                };
+                bookingTrendChart.data.datasets[0].data = yearData[year];
+                bookingTrendChart.update();
+            });
+        };
+    </script>
+
+</body>
+</html>
